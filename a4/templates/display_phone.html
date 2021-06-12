@@ -1,0 +1,45 @@
+[[extend 'layout.html']]
+
+<div class="section">
+    <h1 class="title">Phone Numbers for</h1>
+</div>
+
+<div class="container is-half">
+   <!-- Put the table here -->
+    <table class="table is-striped is-fullwidth">
+        <thead>
+        [[for h in headers:]]
+        <th>[[=h]]</th>
+        [[pass]]
+        </thead>
+        <th></th>
+        <th></th>
+        <tbody>
+        [[for i, r in enumerate(rows):]]
+        <tr>
+            <td>[[=r.phone_number]]</td>
+            <td>[[=r.phone_name]]</td>
+            <td>
+                <a class="button is-warning" href="[[=URL('edit_phone', contact_id, signer=url_signer)]]">
+                    <span class="icon"><i class="fa fa-fw fa-pencil-square-o"></i></span>
+                </a>
+                <a class="button is-danger" href="[[=URL('delete_phone', contact_id, r.id, signer=url_signer)]]">
+                    <span class="icon"><i class="fa fa-fw fa-trash"></i></span>
+                </a>
+            </td>
+        </tr>
+        [[pass]]
+        </tbody>
+    </table>
+</div>
+
+<section class="section">
+    <a class="button is-success" href="[[=URL('index')]]">
+        <span class="icon"><i class="fa fa-backward"></i> </span>
+        <span>Back</span>
+    </a>
+    <a class="button is-primary" href="[[=URL('add_phone', contact_id, signer=url_signer)]]">
+        <span class="icon"><i class="fa fa-plus"></i> </span>
+        <span>Add Phone Number</span>
+    </a>
+</section>

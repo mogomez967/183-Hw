@@ -1,0 +1,53 @@
+[[extend 'layout.html']]
+
+<div class="section">
+    <h1 class="title">Your Address Book</h1>
+</div>
+
+<div class="container is-half">
+   <!-- Put the table here -->
+    <table class="table is-striped is-fullwidth">
+        <thead>
+        [[for h in headers:]]
+        <th>[[=h]]</th>
+        [[pass]]
+        </thead>
+        <th></th>
+        <th></th>
+        <tbody>
+        [[for r in rows:]]
+        <tr>
+            <td>[[=r.first_name]]</td>
+            <td>[[=r.last_name]]</td>
+            <td>
+                <a class="button is-warning" href="[[=URL('edit_contact', r.id, signer=url_signer)]]">
+                    <span class="icon"><i class="fa fa-fw fa-pencil-square-o"></i></span>
+                </a>
+                <a class="button is-danger" href="[[=URL('delete', r.id, signer=url_signer)]]">
+                    <span class="icon"><i class="fa fa-fw fa-trash"></i></span>
+                </a>
+            </td>
+            <td>
+            [[for id in salt:]]
+                [[if r.id == id.contact_id:]]
+                    [[=id.phone_number + " (" + id.phone_name + "),"]]
+                [[pass]]
+            [[pass]]
+            </td>
+            <td>
+                <a class="button is-warning" href="[[=URL('display_phone', r.id, signer=url_signer)]]">
+                    <span class="icon"><i class="fa fa-fw fa-pencil-square-o"></i></span>
+                </a>
+            </td>
+        </tr>
+        [[pass]]
+        </tbody>
+    </table>
+</div>
+
+<section class="section">
+    <a class="button is-primary" href="[[=URL('add_contact')]]">
+        <span class="icon"><i class="fa fa-plus"></i> </span>
+        <span>Add Contact</span>
+    </a>
+</section>
